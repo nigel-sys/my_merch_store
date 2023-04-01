@@ -1,26 +1,18 @@
 import React from 'react';
 import './products.css';
-import { useEffect, useState } from 'react';
+import { ProductContext } from '../../context/product-context';
 import { Product } from '../../components/product';
 
 export const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { products } = React.useContext(ProductContext);
 
-  useEffect(() => {
-    const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
+  if (!products) {
+    return <h2>Loading...</h2>;
+  }
 
-    fetch(
-      'https://ts1xl5lhi5.execute-api.us-east-1.amazonaws.com/dev/Inventory',
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+  if (products.length === 0) {
+    return <h2>No products found</h2>;
+  }
 
   return (
     <div className='product-container'>

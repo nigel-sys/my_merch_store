@@ -1,26 +1,44 @@
-import React from 'react';
+/* eslint-disable array-callback-return */
+import React, { useContext } from 'react';
+import { ProductContext } from '../../context/product-context';
+import { CartItem } from './cart-item';
+import './cart.css';
+import { useNavigate } from 'react-router-dom';
 
-export const Cart = ({ cartItems, setCartItems }) => {
+export const Cart = () => {
+  const { products, cartItems, getTotalAmount } = useContext(ProductContext);
+  const totalAmount = getTotalAmount();
+  const navigate = useNavigate();
   return (
-    <div className='container'>
-      <h1>Your Cart</h1>
-      <div className='row'>
-        <div className='col-md-8'>
-          {cartItems.length === 0 && <p>Your cart is empty.</p>}
-          {cartItems.map((item) => (
-            <div key={item.id}>
-              <h3>{item.name}</h3>
-              <p>{item.price}</p>
-              <input type='number' value={item.quantity} />
-              <button>Remove Item</button>
-            </div>
-          ))}
-        </div>
-        <div className='col-md-4'>
-          <h3>Total: </h3>
-          <button>Checkout</button>
-        </div>
+    <div className='cart'>
+      <div>
+        <h1>Your Cart Items</h1>
       </div>
+      <div className='cartItems'>
+        {products.map((product) => {
+          if (cartItems[product.id]) {
+            return (
+              <CartItem
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                quantity={product.quantity}
+              />
+            );
+          }
+        })}
+      </div>
+      {totalAmount > 0 ? (
+        <div className='checkout'>
+          <h3>Total: €{totalAmount}</h3>
+          <button className='cart-checkout' onClick={() => navigate('/')}>
+            Continue Shopping
+          </button>
+          <button className='cart-checkout'>Checkout</button>
+        </div>
+      ) : (
+        <h1>Your cart is empty</h1>
+      )}
     </div>
   );
 };

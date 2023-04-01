@@ -1,0 +1,37 @@
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.item-details {
+  margin-right: 20px;
+}
+
+.item-details h3 {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+}
+
+.item-details p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.item-actions button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.item-actions button:hover {
+  background-color: #c82333;
+}

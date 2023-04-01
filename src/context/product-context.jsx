@@ -1,8 +1,27 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 export const ProductContext = React.createContext(null);
 
 export const ProductContextProvider = (props) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
+
+    fetch(
+      'https://ts1xl5lhi5.execute-api.us-east-1.amazonaws.com/dev/Inventory',
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error('Error fetching products:', error));
+  }, []);
+
   const [cartItems, setCartItems] = React.useState([]);
 
   const addToCart = (id) => {
@@ -28,7 +47,44 @@ export const ProductContextProvider = (props) => {
     });
   };
 
-  const contextValue = { cartItems, addToCart, removeFromCart };
+  const updatedCartItems = (id, quantity) => {
+    setCartItems((prevCart) => {
+      const updatedCartItems = {
+        ...prevCart,
+        [id]: quantity,
+      };
+      return updatedCartItems;
+    });
+  };
+
+  const deleteFromCart = (id) => {
+    setCartItems((prevCart) => {
+      const updatedCartItems = {
+        ...prevCart,
+        [id]: 0,
+      };
+      return updatedCartItems;
+    });
+  };
+
+  const getTotalAmount = () => {
+    let totalAmount = 0;
+    for (let item in cartItems) {
+      let itemInfo = products.find((product) => product.id === Number(item));
+      totalAmount += cartItems[item] * itemInfo.price;
+    }
+    return totalAmount;
+  };
+
+  const contextValue = {
+    products,
+    cartItems,
+    addToCart,
+    removeFromCart,
+    updatedCartItems,
+    getTotalAmount,
+    deleteFromCart,
+  };
 
   return (
     <ProductContext.Provider value={contextValue}>

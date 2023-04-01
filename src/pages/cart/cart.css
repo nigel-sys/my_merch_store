@@ -1,0 +1,29 @@
+.cart {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.cart h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .cart {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .cart h1 {
+    font-size: 20px;
+  }
+}
