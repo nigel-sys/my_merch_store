@@ -5,6 +5,7 @@ import { Cart } from './pages/cart/cart';
 import { Products } from './pages/products/products';
 import { ProductContextProvider } from './context/product-context';
 import { Order } from './pages/order/order';
+import { OrderConfirmation } from './pages/order/order-confirmation';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Products />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/acknowledgement' element={<Order />} />'
+            <Route path='/order' element={<Order />} />'
+            <Route path='/confirmation' element={<OrderConfirmation />} />
           </Routes>
         </Router>
       </ProductContextProvider>

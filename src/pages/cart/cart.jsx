@@ -6,38 +6,9 @@ import './cart.css';
 import { useNavigate } from 'react-router-dom';
 
 export const Cart = () => {
-  const { accessToken, products, cartItems, getTotalAmount } =
-    useContext(ProductContext);
+  const { products, cartItems, getTotalAmount } = useContext(ProductContext);
   const totalAmount = getTotalAmount();
   const navigate = useNavigate();
-
-  const handleOrder = async () => {
-    try {
-      const promises = products.map((product) => {
-        if (cartItems[product.id]) {
-          const updatedQuantity = product.quantity - cartItems[product.id];
-          return fetch(
-            `https://ts1xl5lhi5.execute-api.us-east-1.amazonaws.com/dev/Inventory/${product.id}`,
-            {
-              method: 'PUT',
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ quantity: updatedQuantity }),
-            }
-          );
-        } else {
-          return product;
-        }
-      });
-
-      await Promise.all(promises);
-      navigate('/acknowledgement');
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className='cart'>
@@ -64,8 +35,8 @@ export const Cart = () => {
           <button className='cart-checkout' onClick={() => navigate('/')}>
             Continue Shopping
           </button>
-          <button className='cart-checkout' onClick={handleOrder}>
-            Order
+          <button className='cart-checkout' onClick={() => navigate('/order')}>
+            Checkout
           </button>
         </div>
       ) : (
