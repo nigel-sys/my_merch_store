@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+
+test:
+  stage: test
+  script:
+    - npm run test
+
+deploy:
+  stage: deploy
+  script:
+    - npm install -g aws-cli
+    - aws s3 sync build/ s3://mymerchstore/
+  environment:
+    name: production
+    url: http://mymerchstore.s3-website-us-east-1.amazonaws.com
+  only:
+    - main
