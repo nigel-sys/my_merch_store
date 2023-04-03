@@ -5,10 +5,8 @@ export const ProductContext = React.createContext(null);
 
 export const ProductContextProvider = (props) => {
   const [products, setProducts] = useState([]);
-
+  const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
   useEffect(() => {
-    const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
-
     fetch(
       'https://ts1xl5lhi5.execute-api.us-east-1.amazonaws.com/dev/Inventory',
       {
@@ -20,7 +18,7 @@ export const ProductContextProvider = (props) => {
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+  });
 
   const [cartItems, setCartItems] = React.useState([]);
 
@@ -77,6 +75,7 @@ export const ProductContextProvider = (props) => {
   };
 
   const contextValue = {
+    accessToken,
     products,
     cartItems,
     addToCart,
