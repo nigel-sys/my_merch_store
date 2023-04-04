@@ -1,5 +1,6 @@
 before_script:
   - apt-get update && apt-get install -y npm
+  - npm install -g react-scripts
 
 stages:
   - build
@@ -9,7 +10,6 @@ stages:
 build:
   stage: build
   script:
-    - npm install
     - npm run build
   artifacts:
     paths:
