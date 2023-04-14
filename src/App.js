@@ -6,6 +6,7 @@ import { Products } from './pages/products/products';
 import { ProductContextProvider } from './context/product-context';
 import { Order } from './pages/order/order';
 import { OrderConfirmation } from './pages/order/order-confirmation';
+import { Time } from './components/time';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <ProductContextProvider>
         <Router>
           <Navbar />
+          <Time />
           <Routes>
             <Route path='/' element={<Products />} />
             <Route path='/cart' element={<Cart />} />
