@@ -1,5 +1,3 @@
-Sure, here's a sample README based on the information provided in the chat:
-
 # My Merch Store
 
 My Merch Store is a cloud application solution that integrates and consumes web application services. The solution consists of a client application that allows user input and consumes at least three different web services:
