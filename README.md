@@ -1,5 +1,13 @@
 # My Merch Store
 
+## Screenshots
+
+![MyMerchStore1](https://github.com/nigel-sys/my_merch_store/blob/main/Screenshots/MyMerchStore1.png)
+![MyMerchStore2](https://github.com/nigel-sys/my_merch_store/blob/main/Screenshots/MyMerchStore2.png)
+![MyMerchStore3](https://github.com/nigel-sys/my_merch_store/blob/main/Screenshots/MyMerchStore3.png)
+![MyMerchStore4](https://github.com/nigel-sys/my_merch_store/blob/main/Screenshots/MyMerchStore4.png)
+![MyMerchStore5](https://github.com/nigel-sys/my_merch_store/blob/main/Screenshots/MyMerchStore5.png)
+
 My Merch Store is a cloud application solution that integrates and consumes web application services. The solution consists of a client application that allows user input and consumes at least three different web services:
 
 - One web service written by the developer
